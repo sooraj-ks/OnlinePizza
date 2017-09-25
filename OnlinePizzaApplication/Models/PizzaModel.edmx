@@ -1,0 +1,212 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="PizzaDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="PizzaDetails">
+          <Key>
+            <PropertyRef Name="PizzaID" />
+          </Key>
+          <Property Name="PizzaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PizzaName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Amount" Type="int" Nullable="false" />
+          <Property Name="Description" Type="varchar" MaxLength="500" Nullable="false" />
+        </EntityType>
+        <EntityType Name="PizzaSelected">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="PizzaID" Type="int" />
+          <Property Name="NumberOfPizza" Type="int" />
+          <Property Name="Amount" Type="money" />
+          <Property Name="UserName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="Address" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+          <Property Name="UserStatus" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <Association Name="FK__PizzaSele__Pizza__2C3393D0">
+          <End Role="PizzaDetails" Type="Self.PizzaDetails" Multiplicity="0..1" />
+          <End Role="PizzaSelected" Type="Self.PizzaSelected" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PizzaDetails">
+              <PropertyRef Name="PizzaID" />
+            </Principal>
+            <Dependent Role="PizzaSelected">
+              <PropertyRef Name="PizzaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__PizzaSele__UserN__2E1BDC42">
+          <End Role="UserDetail" Type="Self.UserDetail" Multiplicity="0..1" />
+          <End Role="PizzaSelected" Type="Self.PizzaSelected" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="PizzaSelected">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PizzaDBModelStoreContainer">
+          <EntitySet Name="PizzaDetails" EntityType="Self.PizzaDetails" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="PizzaSelected" EntityType="Self.PizzaSelected" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="UserDetail" EntityType="Self.UserDetail" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK__PizzaSele__Pizza__2C3393D0" Association="Self.FK__PizzaSele__Pizza__2C3393D0">
+            <End Role="PizzaDetails" EntitySet="PizzaDetails" />
+            <End Role="PizzaSelected" EntitySet="PizzaSelected" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PizzaSele__UserN__2E1BDC42" Association="Self.FK__PizzaSele__UserN__2E1BDC42">
+            <End Role="UserDetail" EntitySet="UserDetail" />
+            <End Role="PizzaSelected" EntitySet="PizzaSelected" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="PizzaDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="PizzaDetail">
+          <Key>
+            <PropertyRef Name="PizzaID" />
+          </Key>
+          <Property Name="PizzaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PizzaName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Amount" Type="Int32" Nullable="false" />
+          <Property Name="Description" Type="String" MaxLength="500" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="PizzaSelecteds" Relationship="Self.FK__PizzaSele__Pizza__2C3393D0" FromRole="PizzaDetails" ToRole="PizzaSelected" />
+        </EntityType>
+        <EntityType Name="PizzaSelected">
+          <Key>
+            <PropertyRef Name="OrderID" />
+          </Key>
+          <Property Name="OrderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="PizzaID" Type="Int32" />
+          <Property Name="NumberOfPizza" Type="Int32" />
+          <Property Name="Amount" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="PizzaDetail" Relationship="Self.FK__PizzaSele__Pizza__2C3393D0" FromRole="PizzaSelected" ToRole="PizzaDetails" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="UserDetail" Relationship="PizzaDBModel.FK__PizzaSele__UserN__2E1BDC42" FromRole="PizzaSelected" ToRole="UserDetail" />
+        </EntityType>
+        <EntityType Name="UserDetail">
+          <Key>
+            <PropertyRef Name="Username" />
+          </Key>
+          <Property Name="Username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Address" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="PizzaSelecteds" Relationship="PizzaDBModel.FK__PizzaSele__UserN__2E1BDC42" FromRole="UserDetail" ToRole="PizzaSelected" />
+          <Property Name="UserStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <Association Name="FK__PizzaSele__Pizza__2C3393D0">
+          <End Role="PizzaDetails" Type="Self.PizzaDetail" Multiplicity="0..1" />
+          <End Role="PizzaSelected" Type="Self.PizzaSelected" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="PizzaDetails">
+              <PropertyRef Name="PizzaID" />
+            </Principal>
+            <Dependent Role="PizzaSelected">
+              <PropertyRef Name="PizzaID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="PizzaDBEntity" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="PizzaDetails" EntityType="Self.PizzaDetail" />
+          <EntitySet Name="PizzaSelecteds" EntityType="Self.PizzaSelected" />
+          <EntitySet Name="UserDetails" EntityType="Self.UserDetail" />
+          <AssociationSet Name="FK__PizzaSele__Pizza__2C3393D0" Association="Self.FK__PizzaSele__Pizza__2C3393D0">
+            <End Role="PizzaDetails" EntitySet="PizzaDetails" />
+            <End Role="PizzaSelected" EntitySet="PizzaSelecteds" />
+          </AssociationSet>
+          <AssociationSet Name="FK__PizzaSele__UserN__2E1BDC42" Association="PizzaDBModel.FK__PizzaSele__UserN__2E1BDC42">
+            <End Role="UserDetail" EntitySet="UserDetails" />
+            <End Role="PizzaSelected" EntitySet="PizzaSelecteds" />
+          </AssociationSet>
+        </EntityContainer>
+        <Association Name="FK__PizzaSele__UserN__2E1BDC42">
+          <End Type="PizzaDBModel.UserDetail" Role="UserDetail" Multiplicity="0..1" />
+          <End Type="PizzaDBModel.PizzaSelected" Role="PizzaSelected" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="UserDetail">
+              <PropertyRef Name="Username" />
+            </Principal>
+            <Dependent Role="PizzaSelected">
+              <PropertyRef Name="UserName" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="PizzaDBModelStoreContainer" CdmEntityContainer="PizzaDBEntity">
+          <EntitySetMapping Name="PizzaDetails">
+            <EntityTypeMapping TypeName="PizzaDBModel.PizzaDetail">
+              <MappingFragment StoreEntitySet="PizzaDetails">
+                <ScalarProperty Name="PizzaID" ColumnName="PizzaID" />
+                <ScalarProperty Name="PizzaName" ColumnName="PizzaName" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PizzaSelecteds">
+            <EntityTypeMapping TypeName="PizzaDBModel.PizzaSelected">
+              <MappingFragment StoreEntitySet="PizzaSelected">
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="OrderID" ColumnName="OrderID" />
+                <ScalarProperty Name="PizzaID" ColumnName="PizzaID" />
+                <ScalarProperty Name="NumberOfPizza" ColumnName="NumberOfPizza" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="UserDetails">
+            <EntityTypeMapping TypeName="PizzaDBModel.UserDetail">
+              <MappingFragment StoreEntitySet="UserDetail">
+                <ScalarProperty Name="UserStatus" ColumnName="UserStatus" />
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,46 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Pizza.master.cs" Inherits="OnlinePizzaApplication.Pages.Pizza" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="../Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../Content/StyleSheet.css" rel="stylesheet" />
+</head>
+
+<body>
+    <form id="form1" runat="server">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+                <a class="aother">PizzaPlace</a>
+                <a class="aother" href="Index.aspx">Select Pizza</a>
+                <a href="Cart.aspx">Cart</a>
+                <label>Welcome</label>
+                <asp:Label ID="User" runat="server"></asp:Label><label>!</label>
+                <ul class="navbar-nav navbar-right" style="padding-right:12px;">
+                <asp:Button CssClass="LogoutButton" OnClick="LogoutMethod" runat="server" ID="LogoutButton" Text="Logout" Height="49px"/>
+                </ul>
+        </div>
+        <br /><br />
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <br /><br />
+    </form>
+    <hr />
+    <center>
+    <div class="footer">
+        Pizza Place Copyright protected.<br />
+        320496247, 221B Baker Street
+    </div>
+    </center>
+    <script src="../scripts/jquery-3.2.1.js"></script>
+    <script src="../scripts/jquery.validate.js"></script>
+    <script src="../scripts/jquery-3.2.1.intellisense.js"></script>
+    <script src="../scripts/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>

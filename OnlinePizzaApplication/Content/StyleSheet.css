@@ -1,0 +1,83 @@
+﻿html{
+    background-color:#affff1;
+}
+body {
+    font-size: 24px;
+    font-family: Calibri,Arial, Helvetica, sans-serif;
+    grid-column-align: center;
+    background-color:#affff1;
+}
+
+.bodyimg{
+    background-color:#affff1;
+}
+
+.box {
+    height: 30px;
+    width: 250px;
+}
+
+.LogoutButton{
+    font-size: 28px;
+    background-color:none;
+    border:none;
+    font-style: oblique;
+}
+
+.Button {
+    height: 50px;
+    width: 200px;
+}
+
+.OtherLink {
+    width: auto;
+    height: 30px;
+    color: dodgerblue;
+    background-color: white;
+    border: none;
+}
+
+#CheckBox1{
+    height:20px;
+    width:20px;
+}
+
+.aother {
+    font-size: 28px;
+    float: left;
+    padding-left: 20px;
+    padding-right: 20px;
+    font-style: oblique;
+}
+
+#LoginTable {
+    column-width: 150px;
+}
+
+.divContent {
+    height: 60px;
+}
+
+#GridView1 {
+    width: 650px;
+}
+
+.footer {
+    padding: 30px 0;
+    font-size:16px;
+    background-color:#affff1;
+}
+
+.submit {
+    width: 300px;
+    margin: auto;
+}
+
+#PizzaNameDropDown {
+    height: 30px;
+    width: 200px;
+    overflow: hidden;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}

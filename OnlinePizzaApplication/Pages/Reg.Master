@@ -1,0 +1,43 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Reg.master.cs" Inherits="OnlinePizzaApplication.Pages.Reg" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <title></title>
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <link href="../Content/bootstrap-theme.css" rel="stylesheet" />
+    <link href="../Content/bootstrap.css" rel="stylesheet" />
+    <link href="../Content/StyleSheet.css" rel="stylesheet" />
+    <style type="text/css">
+    </style>
+</head>
+<body>
+    <form id="form1" runat="server">
+        <div class="navbar navbar-inverse navbar-fixed-top">
+           <ul class="nav">
+                <li><a class="aother">PizzaPlace</a></li>
+                <li><a class="alog" href="Login.aspx">Login</a></li>
+            </ul>
+        </div>
+        <br /><br />
+        <div>
+            <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+            </asp:ContentPlaceHolder>
+        </div>
+        <br /><br />
+    </form>
+    <hr />
+    <center>
+    <div class="footer">
+        Pizza Place Copyright protected.<br />
+        320496247, 221B Baker Street
+    </div>
+    </center>
+    <script src="../scripts/jquery-3.2.1.js"></script>
+    <script src="../scripts/jquery.validate.js"></script>
+    <script src="../scripts/jquery-3.2.1.intellisense.js"></script>
+    <script src="../scripts/jquery.validate.unobtrusive.js"></script>
+</body>
+</html>
